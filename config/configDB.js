@@ -12,13 +12,13 @@ const {
 
 CLIENT = new Seq(DB, USER,PASSWORD, {
     host: HOST,
-    dialect: 'postgres',
-    dialectOptions: {
-        ssl: {
-            require: true,
-            rejectUnauthorized: false
-        }
-    },
+    dialect: 'mysql',
+    // dialectOptions: {
+    //     ssl: {
+    //         require: true,
+    //         rejectUnauthorized: false
+    //     }
+    // },
     operatorAliases: 0,
     pool: {
         max: 10,

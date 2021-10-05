@@ -3,13 +3,8 @@ const sequileze =  require('../model').sequelize;
 const task1 =  async (req, res) => {
 
     sequileze.query(
-        `
-            INSERT INTO "Users" ("UserName", "Parent", "createdAt", "updatedAt") VALUES ('Ali', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-            INSERT INTO "Users" ("UserName", "Parent", "createdAt", "updatedAt") VALUES ('Budi', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-            INSERT INTO "Users" ("UserName", "Parent", "createdAt", "updatedAt") VALUES ('Cecep', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
-            SELECT "id" AS ID,"UserName",(SELECT "UserName" FROM "Users" B WHERE B."id" = A."Parent") AS UserParent FROM "Users" A
-        `)
+            'SELECT `id` AS ID,`UserName`,(SELECT `UserName` FROM `Users` B WHERE B.`id` = A.`Parent`) AS UserParent FROM `Users` A'
+        )
     .then((data) => {
         return res.status(200).send({
             success: true,
@@ -20,7 +15,8 @@ const task1 =  async (req, res) => {
     .catch((error) => {
         return res.status(400).send({
             success: false,
-            message: "Can't load users"
+            message: "Can't load users",
+            error: error.message
         });
     })
 
